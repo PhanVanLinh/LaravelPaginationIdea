@@ -9,9 +9,10 @@ use App\Product;
 class HomeController extends Controller
 {
     
+    function index(Request $request) {
+    	$page = $request->page;
+    	$products = Product::all()->skip($page*5)->take(5);
 
-    function index() {
-    	$products = Product::all();
-    	return view("user.index", ["products" => $products]);
+    	return view("user.index", ["products" => $products, "page" => $page]);
     }
 }
